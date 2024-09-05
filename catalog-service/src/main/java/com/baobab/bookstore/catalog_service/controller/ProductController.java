@@ -35,7 +35,7 @@ public class ProductController {
 
     @GetMapping("/{code}")
     ResponseEntity<ProductDto> findByCode(@PathVariable String code) {
-        log.info("Fetching product for code: {}", code);
+        log.info("Fetching product for code : {}", code);
         return ResponseEntity.ok(productService.findByCode(code));
     }
 }
