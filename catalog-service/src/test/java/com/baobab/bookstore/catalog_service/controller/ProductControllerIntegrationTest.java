@@ -4,7 +4,6 @@ import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.*;
 
 import com.baobab.bookstore.catalog_service.AbstractIT;
 import com.baobab.bookstore.catalog_service.dto.ProductDto;
@@ -18,7 +17,7 @@ import org.springframework.test.context.jdbc.Sql;
  * @created 04/09/2024
  */
 @Sql("/test-data.sql")
-class ProductControllerTest extends AbstractIT {
+class ProductControllerIntegrationTest extends AbstractIT {
 
     @Test
     void getProducts() {

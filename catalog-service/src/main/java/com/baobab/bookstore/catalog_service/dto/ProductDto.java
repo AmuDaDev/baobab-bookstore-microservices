@@ -1,13 +1,15 @@
 package com.baobab.bookstore.catalog_service.dto;
 
 import java.math.BigDecimal;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author AmuDaDev
  * @created 04/09/2024
  */
-@Data
+@Getter
+@Setter
 public class ProductDto {
     private String code;
     private String name;
