@@ -1,5 +1,8 @@
 package com.baobab.bookstore.order_service.controller;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.notNullValue;
+
 import com.baobab.bookstore.order_service.AbstractIT;
 import com.baobab.bookstore.order_service.testdata.TestDataFactory;
 import io.restassured.http.ContentType;
@@ -7,9 +10,6 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.jdbc.Sql;
-
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.notNullValue;
 
 /**
  * @author AmuDaDev

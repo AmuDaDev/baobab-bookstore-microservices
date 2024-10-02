@@ -6,15 +6,14 @@ import com.baobab.bookstore.order_service.dto.OrderStatus;
 import com.baobab.bookstore.order_service.model.Order;
 import com.baobab.bookstore.order_service.model.OrderItem;
 import com.baobab.bookstore.order_service.repository.OrderRepository;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author AmuDaDev
@@ -34,13 +33,15 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public CreateOrderResponse createOrder(String userName, CreateOrderRequest request) {
-        //order
+        // order
         Order newOrder = mapper.map(request, Order.class);
         newOrder.setUserName(userName);
         newOrder.setOrderNumber(UUID.randomUUID().toString());
         newOrder.setStatus(OrderStatus.NEW);
-        //items
-        Set<OrderItem> items = request.getItems().stream().map((element) -> mapper.map(element, OrderItem.class)).collect(Collectors.toSet());
+        // items
+        Set<OrderItem> items = request.getItems().stream()
+                .map((element) -> mapper.map(element, OrderItem.class))
+                .collect(Collectors.toSet());
         items.forEach(item -> item.setOrder(newOrder));
         newOrder.setItems(items);
         Order savedOrder = orderRepository.save(newOrder);

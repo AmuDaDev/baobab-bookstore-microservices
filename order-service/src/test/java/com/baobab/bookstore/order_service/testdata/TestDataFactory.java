@@ -2,14 +2,13 @@ package com.baobab.bookstore.order_service.testdata;
 
 import static org.instancio.Select.field;
 
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Set;
-
 import com.baobab.bookstore.order_service.dto.AddressDto;
 import com.baobab.bookstore.order_service.dto.CreateOrderRequest;
 import com.baobab.bookstore.order_service.dto.CustomerDto;
 import com.baobab.bookstore.order_service.dto.OrderItemDto;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Set;
 import org.instancio.Instancio;
 
 /**
