@@ -10,7 +10,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class CustomerDto {
+public class Customer {
     @NotBlank(message = "Customer Name is required")
     String name;
 

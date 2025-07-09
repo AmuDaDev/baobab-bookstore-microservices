@@ -24,6 +24,6 @@ public class OrderItemDto {
 
     @NotNull(message = "Price is required") BigDecimal price;
 
-    @NotNull(message = "Quantity is required") @Min(1)
+    @NotNull(message = "Quantity is required") @Min(value = 1, message = "Min quantity must be 1")
     Integer quantity;
 }

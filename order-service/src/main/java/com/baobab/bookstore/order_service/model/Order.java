@@ -1,7 +1,7 @@
 package com.baobab.bookstore.order_service.model;
 
-import com.baobab.bookstore.order_service.dto.AddressDto;
-import com.baobab.bookstore.order_service.dto.CustomerDto;
+import com.baobab.bookstore.order_service.dto.Address;
+import com.baobab.bookstore.order_service.dto.Customer;
 import com.baobab.bookstore.order_service.dto.OrderStatus;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -56,7 +56,7 @@ public class Order {
                 @AttributeOverride(name = "email", column = @Column(name = "customer_email")),
                 @AttributeOverride(name = "phone", column = @Column(name = "customer_phone"))
             })
-    private CustomerDto customerDto;
+    private Customer customer;
 
     @Embedded
     @AttributeOverrides(
@@ -68,7 +68,7 @@ public class Order {
                 @AttributeOverride(name = "zipCode", column = @Column(name = "delivery_address_zip_code")),
                 @AttributeOverride(name = "country", column = @Column(name = "delivery_address_country")),
             })
-    private AddressDto deliveryAddressDto;
+    private Address deliveryAddress;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;

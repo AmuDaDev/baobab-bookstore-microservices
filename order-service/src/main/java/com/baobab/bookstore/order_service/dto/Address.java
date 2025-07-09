@@ -10,7 +10,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class AddressDto {
+public class Address {
     @NotBlank(message = "AddressLine1 is required")
     String addressLine1;
 

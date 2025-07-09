@@ -18,8 +18,8 @@ public class CreateOrderRequest {
     Set<OrderItemDto> items;
 
     @Valid
-    CustomerDto customer;
+    Customer customer;
 
     @Valid
-    AddressDto deliveryAddress;
+    Address deliveryAddress;
 }

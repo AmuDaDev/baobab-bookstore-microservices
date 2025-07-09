@@ -2,9 +2,9 @@ package com.baobab.bookstore.order_service.testdata;
 
 import static org.instancio.Select.field;
 
-import com.baobab.bookstore.order_service.dto.AddressDto;
+import com.baobab.bookstore.order_service.dto.Address;
 import com.baobab.bookstore.order_service.dto.CreateOrderRequest;
-import com.baobab.bookstore.order_service.dto.CustomerDto;
+import com.baobab.bookstore.order_service.dto.Customer;
 import com.baobab.bookstore.order_service.dto.OrderItemDto;
 import java.math.BigDecimal;
 import java.util.List;
@@ -24,33 +24,33 @@ public class TestDataFactory {
 
     public static CreateOrderRequest createValidOrderRequest() {
         return Instancio.of(CreateOrderRequest.class)
-                .generate(field(CustomerDto::getEmail), gen -> gen.text().pattern("#a#a#a#a#a#a@mail.com"))
+                .generate(field(Customer::getEmail), gen -> gen.text().pattern("#a#a#a#a#a#a@mail.com"))
                 .set(field(CreateOrderRequest::getItems), VALID_ORDER_ITEMS)
-                .generate(field(AddressDto::getCountry), gen -> gen.oneOf(VALID_COUNTIES))
+                .generate(field(Address::getCountry), gen -> gen.oneOf(VALID_COUNTIES))
                 .create();
     }
 
     public static CreateOrderRequest createOrderRequestWithInvalidCustomer() {
         return Instancio.of(CreateOrderRequest.class)
-                .generate(field(CustomerDto::getEmail), gen -> gen.text().pattern("#c#c#c#c#d#d@mail.com"))
-                .set(field(CustomerDto::getPhone), "")
-                .generate(field(AddressDto::getCountry), gen -> gen.oneOf(VALID_COUNTIES))
+                .generate(field(Customer::getEmail), gen -> gen.text().pattern("#c#c#c#c#d#d@mail.com"))
+                .set(field(Customer::getPhone), "")
+                .generate(field(Address::getCountry), gen -> gen.oneOf(VALID_COUNTIES))
                 .set(field(CreateOrderRequest::getItems), VALID_ORDER_ITEMS)
                 .create();
     }
 
     public static CreateOrderRequest createOrderRequestWithInvalidDeliveryAddress() {
         return Instancio.of(CreateOrderRequest.class)
-                .generate(field(CustomerDto::getEmail), gen -> gen.text().pattern("#c#c#c#c#d#d@mail.com"))
-                .set(field(AddressDto::getCountry), "")
+                .generate(field(Customer::getEmail), gen -> gen.text().pattern("#c#c#c#c#d#d@mail.com"))
+                .set(field(Address::getCountry), "")
                 .set(field(CreateOrderRequest::getItems), VALID_ORDER_ITEMS)
                 .create();
     }
 
     public static CreateOrderRequest createOrderRequestWithNoItems() {
         return Instancio.of(CreateOrderRequest.class)
-                .generate(field(CustomerDto::getEmail), gen -> gen.text().pattern("#c#c#c#c#d#d@mail.com"))
-                .generate(field(AddressDto::getCountry), gen -> gen.oneOf(VALID_COUNTIES))
+                .generate(field(Customer::getEmail), gen -> gen.text().pattern("#c#c#c#c#d#d@mail.com"))
+                .generate(field(Address::getCountry), gen -> gen.oneOf(VALID_COUNTIES))
                 .set(field(CreateOrderRequest::getItems), Set.of())
                 .create();
     }
