@@ -19,20 +19,8 @@ public class OrderEventPublisher {
         this.properties = properties;
     }
 
-    public void publishNewOrders(OrderEventDTO event) {
-        this.send(properties.newOrdersQueue(), event);
-    }
-
-    public void publishDeliveredOrders(OrderEventDTO event) {
-        this.send(properties.deliveredOrdersQueue(), event);
-    }
-
-    public void publishCancelledOrders(OrderEventDTO event) {
-        this.send(properties.cancelledOrdersQueue(), event);
-    }
-
-    public void publishErrorOrders(OrderEventDTO event) {
-        this.send(properties.errorOrdersQueue(), event);
+    public void publishOrders(OrderEventDTO event) {
+        this.send(properties.ordersQueue(), event);
     }
 
     private void send(String routingKey, Object payload) {

@@ -1,4 +1,4 @@
-package com.baobab.bookstore.order_service.dto;
+package com.baobab.bookstore.notification_service.dto;
 
 import java.time.LocalDateTime;
 import java.util.Set;

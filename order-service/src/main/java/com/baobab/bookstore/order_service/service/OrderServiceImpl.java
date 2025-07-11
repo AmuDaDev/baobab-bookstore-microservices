@@ -56,7 +56,8 @@ public class OrderServiceImpl implements OrderService {
         newOrder.setItems(items);
         Order savedOrder = orderRepository.save(newOrder);
         // Create OrderEvent
-        OrderEventDTO orderCreatedEvent = OrderEventMapper.buildOrderEvent(savedOrder, null);
+        OrderEventDTO orderCreatedEvent =
+                OrderEventMapper.buildOrderEvent(savedOrder, OrderEventType.ORDER_CREATED, null);
         orderEventService.save(orderCreatedEvent, OrderEventType.ORDER_CREATED);
 
         return new CreateOrderResponse(savedOrder.getOrderNumber());
@@ -90,14 +91,17 @@ public class OrderServiceImpl implements OrderService {
                 log.info("OrderNumber: {} can be delivered", order.getOrderNumber());
                 order.setStatus(OrderStatus.DELIVERED);
                 orderRepository.save(order);
-                orderEventService.save(OrderEventMapper.buildOrderEvent(order, null), OrderEventType.ORDER_DELIVERED);
+                orderEventService.save(
+                        OrderEventMapper.buildOrderEvent(order, OrderEventType.ORDER_DELIVERED, null),
+                        OrderEventType.ORDER_DELIVERED);
 
             } else {
                 log.info("OrderNumber: {} can not be delivered", order.getOrderNumber());
                 order.setStatus(OrderStatus.CANCELLED);
                 orderRepository.save(order);
                 orderEventService.save(
-                        OrderEventMapper.buildOrderEvent(order, "Can't deliver to the location"),
+                        OrderEventMapper.buildOrderEvent(
+                                order, OrderEventType.ORDER_CANCELLED, "Can't deliver to the location"),
                         OrderEventType.ORDER_CANCELLED);
             }
         } catch (RuntimeException e) {
@@ -105,7 +109,8 @@ public class OrderServiceImpl implements OrderService {
             order.setStatus(OrderStatus.ERROR);
             orderRepository.save(order);
             orderEventService.save(
-                    OrderEventMapper.buildOrderEvent(order, e.getMessage()), OrderEventType.ORDER_PROCESSING_FAILED);
+                    OrderEventMapper.buildOrderEvent(order, OrderEventType.ORDER_PROCESSING_FAILED, e.getMessage()),
+                    OrderEventType.ORDER_PROCESSING_FAILED);
         }
     }
 

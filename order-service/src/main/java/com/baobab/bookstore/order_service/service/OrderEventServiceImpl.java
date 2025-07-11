@@ -51,29 +51,9 @@ public class OrderEventServiceImpl implements OrderEventService {
         List<OrderEvent> events = orderEventRepository.findAll(sort);
         log.info("Found {} Order Events to be published", events.size());
         for (OrderEvent event : events) {
-            this.publishEvent(event);
+            OrderEventDTO orderEvent = fromJsonPayload(event.getPayload(), OrderEventDTO.class);
+            orderEventPublisher.publishOrders(orderEvent);
             orderEventRepository.delete(event);
-        }
-    }
-
-    private void publishEvent(OrderEvent event) {
-        OrderEventType eventType = event.getEventType();
-        OrderEventDTO orderEvent = fromJsonPayload(event.getPayload(), OrderEventDTO.class);
-        switch (eventType) {
-            case ORDER_CREATED:
-                orderEventPublisher.publishNewOrders(orderEvent);
-                break;
-            case ORDER_DELIVERED:
-                orderEventPublisher.publishDeliveredOrders(orderEvent);
-                break;
-            case ORDER_CANCELLED:
-                orderEventPublisher.publishCancelledOrders(orderEvent);
-                break;
-            case ORDER_PROCESSING_FAILED:
-                orderEventPublisher.publishErrorOrders(orderEvent);
-                break;
-            default:
-                log.warn("Unsupported OrderEventType: {}", eventType);
         }
     }
 

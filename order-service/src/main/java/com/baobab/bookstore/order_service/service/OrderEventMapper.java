@@ -1,6 +1,7 @@
 package com.baobab.bookstore.order_service.service;
 
 import com.baobab.bookstore.order_service.dto.OrderEventDTO;
+import com.baobab.bookstore.order_service.dto.OrderEventType;
 import com.baobab.bookstore.order_service.dto.OrderItemDto;
 import com.baobab.bookstore.order_service.model.Order;
 import java.time.LocalDateTime;
@@ -13,8 +14,9 @@ import java.util.stream.Collectors;
  * @created 09/07/2025
  */
 public class OrderEventMapper {
-    static OrderEventDTO buildOrderEvent(Order order, String reason) {
+    static OrderEventDTO buildOrderEvent(Order order, OrderEventType eventType, String reason) {
         return new OrderEventDTO(
+                eventType,
                 UUID.randomUUID().toString(),
                 order.getOrderNumber(),
                 getOrderItems(order),
