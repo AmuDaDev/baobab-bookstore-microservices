@@ -8,7 +8,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author AmuDaDev
  * @created 11/07/2025
  */
-
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
     @Override
@@ -19,5 +18,4 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .allowedOriginPatterns("*")
                 .allowCredentials(false);
     }
-
 }
