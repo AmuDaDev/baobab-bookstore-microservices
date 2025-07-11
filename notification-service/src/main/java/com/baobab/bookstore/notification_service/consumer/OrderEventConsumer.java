@@ -28,7 +28,8 @@ public class OrderEventConsumer {
     @SchedulerLock(name = "consumeOrderEvents")
     public void consumeOrderEvents(OrderEventDTO event) {
         LockAssert.assertLocked();
-        log.info("Received a {} message with orderNumber:{}: ", event.eventType().name(), event.orderNumber());
+        log.info(
+                "Received a {} message with orderNumber:{}: ", event.eventType().name(), event.orderNumber());
         notificationService.sendNotification(event);
     }
 }

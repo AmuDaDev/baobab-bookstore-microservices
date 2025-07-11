@@ -7,7 +7,4 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @created 05/09/2024
  */
 @ConfigurationProperties(prefix = "notification")
-public record ApplicationProperties(
-        String orderEventsExchange,
-        String ordersQueue,
-        String supportEmail) {}
+public record ApplicationProperties(String orderEventsExchange, String ordersQueue, String supportEmail) {}

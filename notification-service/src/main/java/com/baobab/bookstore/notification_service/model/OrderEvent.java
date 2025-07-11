@@ -1,18 +1,16 @@
 package com.baobab.bookstore.notification_service.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 /**
  * @author AmuDaDev
  * @created 10/07/2025
  */
-
 @Getter
 @Setter
 @NoArgsConstructor

@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @author AmuDaDev
  * @created 10/07/2025
  */
-
 @Service
 @Transactional
 public class NotificationServiceImpl implements NotificationService {
@@ -26,7 +25,8 @@ public class NotificationServiceImpl implements NotificationService {
     private final ApplicationProperties properties;
     private final OrderEventRepository orderEventRepository;
 
-    public NotificationServiceImpl(JavaMailSender emailSender, ApplicationProperties properties, OrderEventRepository orderEventRepository) {
+    public NotificationServiceImpl(
+            JavaMailSender emailSender, ApplicationProperties properties, OrderEventRepository orderEventRepository) {
         this.emailSender = emailSender;
         this.properties = properties;
         this.orderEventRepository = orderEventRepository;
@@ -40,7 +40,7 @@ public class NotificationServiceImpl implements NotificationService {
         }
 
         log.info("Received new OrderCreatedEvent with orderNumber:{}: ", orderEventDTO.orderNumber());
-        //Send an email notification
+        // Send an email notification
         sendEmail(orderEventDTO);
 
         OrderEvent orderEvent = new OrderEvent();
@@ -48,7 +48,7 @@ public class NotificationServiceImpl implements NotificationService {
         orderEventRepository.save(orderEvent);
     }
 
-    private void sendEmail(OrderEventDTO event){
+    private void sendEmail(OrderEventDTO event) {
         OrderEventType eventType = event.eventType();
         String message = null;
         switch (eventType) {
@@ -60,7 +60,7 @@ public class NotificationServiceImpl implements NotificationService {
                         ----------------------------------------------------
                         Dear %s,
                         Your order with orderNumber: %s has been created successfully.
-        
+
                         Thanks,
                         BookStore Team
                         ===================================================
@@ -76,7 +76,7 @@ public class NotificationServiceImpl implements NotificationService {
                         ----------------------------------------------------
                         Dear %s,
                         Your order with orderNumber: %s has been delivered successfully.
-        
+
                         Thanks,
                         BookStore Team
                         ===================================================
@@ -93,7 +93,7 @@ public class NotificationServiceImpl implements NotificationService {
                         Dear %s,
                         Your order with orderNumber: %s has been cancelled.
                         Reason: %s
-        
+
                         Thanks,
                         BookStore Team
                         ===================================================
@@ -110,7 +110,7 @@ public class NotificationServiceImpl implements NotificationService {
                         Hi Team,
                         The order processing failed for orderNumber: %s.
                         Reason: %s
-        
+
                         Thanks,
                         BookStore Team
                         ===================================================
