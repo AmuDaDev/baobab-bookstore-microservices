@@ -16,14 +16,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class OrderItemDto {
-    @NotBlank(message = "Code is required")
-    String code;
+    @NotBlank(message = "Code is required") String code;
 
-    @NotBlank(message = "Name is required")
-    String name;
+    @NotBlank(message = "Name is required") String name;
 
     @NotNull(message = "Price is required") BigDecimal price;
 
-    @NotNull(message = "Quantity is required") @Min(value = 1, message = "Min quantity must be 1")
-    Integer quantity;
+    @NotNull(message = "Quantity is required") @Min(value = 1, message = "Min quantity must be 1") Integer quantity;
 }

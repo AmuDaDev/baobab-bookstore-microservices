@@ -11,20 +11,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Address {
-    @NotBlank(message = "AddressLine1 is required")
-    String addressLine1;
+    @NotBlank(message = "AddressLine1 is required") String addressLine1;
 
     String addressLine2;
 
-    @NotBlank(message = "City is required")
-    String city;
+    @NotBlank(message = "City is required") String city;
 
-    @NotBlank(message = "State is required")
-    String state;
+    @NotBlank(message = "State is required") String state;
 
-    @NotBlank(message = "ZipCode is required")
-    String zipCode;
+    @NotBlank(message = "ZipCode is required") String zipCode;
 
-    @NotBlank(message = "Country is required")
-    String country;
+    @NotBlank(message = "Country is required") String country;
 }

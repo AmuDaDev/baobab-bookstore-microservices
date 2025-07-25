@@ -11,12 +11,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Customer {
-    @NotBlank(message = "Customer Name is required")
-    String name;
+    @NotBlank(message = "Customer Name is required") String name;
 
-    @NotBlank(message = "Customer email is required")
-    String email;
+    @NotBlank(message = "Customer email is required") String email;
 
-    @NotBlank(message = "Customer Phone number is required")
-    String phone;
+    @NotBlank(message = "Customer Phone number is required") String phone;
 }

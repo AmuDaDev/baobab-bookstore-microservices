@@ -14,6 +14,7 @@ import io.restassured.common.mapper.TypeRef;
 import io.restassured.http.ContentType;
 import java.math.BigDecimal;
 import java.util.List;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -61,6 +62,7 @@ class OrderControllerIntegrationTest extends AbstractIT {
                          }
                     """;
             given().contentType(ContentType.JSON)
+                    .header("Authorization", "Bearer " + getToken())
                     .body(payload)
                     .when()
                     .post("/api/orders")
@@ -72,8 +74,8 @@ class OrderControllerIntegrationTest extends AbstractIT {
         @Test
         void shouldReturnBadRequestWhenMandatoryDataIsMissing() {
             var payload = TestDataFactory.createOrderRequestWithInvalidCustomer();
-            System.out.println(payload);
             given().contentType(ContentType.JSON)
+                    .header("Authorization", "Bearer " + getToken())
                     .body(payload)
                     .when()
                     .post("/api/orders")
@@ -103,7 +105,7 @@ class OrderControllerIntegrationTest extends AbstractIT {
         @Test
         void shouldGetOrdersSummarySuccessfully() {
             List<OrderSummary> orderSummaries = given().when()
-                    // .header("Authorization", "Bearer " + getToken())
+                    .header("Authorization", "Bearer " + getToken())
                     .get("/api/orders")
                     .then()
                     .statusCode(200)
@@ -122,7 +124,7 @@ class OrderControllerIntegrationTest extends AbstractIT {
         @Test
         void shouldGetOrderSuccessfully() {
             given().when()
-                    // .header("Authorization", "Bearer " + getToken())
+                    .header("Authorization", "Bearer " + getToken())
                     .get("/api/orders/{orderNumber}", orderNumber)
                     .then()
                     .statusCode(200)

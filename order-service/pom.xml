@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.9</version>
+		<version>3.5.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.baobab.bookstore</groupId>
@@ -28,13 +28,13 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
-		<springdoc-openapi.version>2.5.0</springdoc-openapi.version>
-		<resilience4j.version>2.2.0</resilience4j.version>
-		<spotless-maven-plugin.version>2.43.0</spotless-maven-plugin.version>
-		<instancio.version>4.5.1</instancio.version>
-		<wiremock.version>3.5.4</wiremock.version>
-		<wiremock-testcontainers.version>1.0-alpha-13</wiremock-testcontainers.version>
-		<shedlock.version>6.7.0</shedlock.version>
+		<springdoc-openapi.version>2.8.9</springdoc-openapi.version>
+		<resilience4j.version>2.3.0</resilience4j.version>
+		<spotless-maven-plugin.version>2.46.1</spotless-maven-plugin.version>
+		<instancio.version>5.4.1</instancio.version>
+		<wiremock.version>3.13.1</wiremock.version>
+		<wiremock-testcontainers.version>1.0-alpha-15</wiremock-testcontainers.version>
+		<shedlock.version>6.9.2</shedlock.version>
 		<dockerImageName>amuk3lani/baobab-bookstore-${project.artifactId}</dockerImageName>
 	</properties>
 	<dependencies>
@@ -61,6 +61,10 @@
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-database-postgresql</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.modelmapper</groupId>
@@ -152,6 +156,7 @@
 			<version>${instancio.version}</version>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>net.javacrumbs.shedlock</groupId>
 			<artifactId>shedlock-spring</artifactId>
@@ -161,6 +166,26 @@
 			<groupId>net.javacrumbs.shedlock</groupId>
 			<artifactId>shedlock-provider-jdbc-template</artifactId>
 			<version>${shedlock.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.dasniko</groupId>
+			<artifactId>testcontainers-keycloak</artifactId>
+			<version>3.8.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -173,12 +198,6 @@
 					<image>
 						<name>${dockerImageName}</name>
 					</image>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
 				</configuration>
 				<executions>
 					<execution>
@@ -187,6 +206,28 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>io.github.git-commit-id</groupId>
+				<artifactId>git-commit-id-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<failOnNoGitDirectory>false</failOnNoGitDirectory>
+					<failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
+					<generateGitPropertiesFile>true</generateGitPropertiesFile>
+					<includeOnlyProperties>
+						<includeOnlyProperty>^git.branch$</includeOnlyProperty>
+						<includeOnlyProperty>^git.commit.id.abbrev$</includeOnlyProperty>
+						<includeOnlyProperty>^git.commit.user.name$</includeOnlyProperty>
+						<includeOnlyProperty>^git.commit.message.full$</includeOnlyProperty>
+					</includeOnlyProperties>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>com.diffplug.spotless</groupId>

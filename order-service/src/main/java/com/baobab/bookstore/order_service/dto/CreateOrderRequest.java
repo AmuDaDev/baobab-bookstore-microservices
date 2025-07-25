@@ -13,13 +13,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CreateOrderRequest {
-    @Valid
-    @NotEmpty(message = "Items cannot be empty")
-    Set<OrderItemDto> items;
+    @Valid @NotEmpty(message = "Items cannot be empty") Set<OrderItemDto> items;
 
-    @Valid
-    Customer customer;
+    @Valid Customer customer;
 
-    @Valid
-    Address deliveryAddress;
+    @Valid Address deliveryAddress;
 }
