@@ -26,14 +26,14 @@ class ProductController {
     }
 
     @GetMapping("/products")
-    String showProductsPage(@RequestParam(name = "page", defaultValue = "1") int page, Model model) {
+    String showProductsPage(@RequestParam(name = "pageNo", defaultValue = "1") int page, Model model) {
         model.addAttribute("pageNo", page);
         return "products";
     }
 
     @GetMapping("/api/products")
     @ResponseBody
-    PagedResult<Product> products(@RequestParam(name = "page", defaultValue = "1") int page, Model model) {
+    PagedResult<Product> products(@RequestParam(name = "pageNo", defaultValue = "1") int page, Model model) {
         log.info("Fetching products for page: {}", page);
         return catalogService.getProducts(page);
     }

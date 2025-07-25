@@ -1,0 +1,41 @@
+# global config
+global:
+  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+
+scrape_configs:
+# The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+- job_name: 'prometheus'
+  # metrics_path defaults to '/metrics'
+  # scheme defaults to 'http'.
+  static_configs:
+  - targets: ['localhost:9090']
+
+- job_name: 'baobab-catalog-service'
+  metrics_path: '/actuator/prometheus'
+  scrape_interval: 5s
+  static_configs:
+  - targets: ['baobab-catalog-service:8081']
+
+- job_name: 'baobab-order-service'
+  metrics_path: '/actuator/prometheus'
+  scrape_interval: 5s
+  static_configs:
+    - targets: ['baobab-order-service:8082']
+
+- job_name: 'baobab-notification-service'
+  metrics_path: '/actuator/prometheus'
+  scrape_interval: 5s
+  static_configs:
+    - targets: ['baobab-notification-service:8083']
+
+- job_name: 'baobab-api-gateway'
+  metrics_path: '/actuator/prometheus'
+  scrape_interval: 5s
+  static_configs:
+    - targets: ['baobab-api-gateway:8989']
+
+- job_name: 'baobab-bookstore-web-app'
+  metrics_path: '/actuator/prometheus'
+  scrape_interval: 5s
+  static_configs:
+    - targets: ['baobab-bookstore-web-app:8080']
