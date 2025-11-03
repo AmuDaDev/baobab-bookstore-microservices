@@ -1,4 +1,4 @@
-name: 'grafana-microservices-monitoring'
+name: 'baobab-bookstore-microservices'
 services:
   prometheus:
     image: prom/prometheus:v2.51.2
