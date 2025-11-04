@@ -36,4 +36,8 @@ services:
       - ./deployment/libs/opentelemetry-javaagent.jar:/opentelemetry-javaagent.jar
       - ./deployment/app-config:/app-config
     networks:
-      - amu-dev-network
+      - my_shared_network
+networks:
+  my_shared_network:
+    name: amu-dev-network
+    external: true
