@@ -31,9 +31,12 @@
 		<springdoc-openapi.version>2.5.0</springdoc-openapi.version>
 		<spotless-maven-plugin.version>2.43.0</spotless-maven-plugin.version>
 		<dockerImageName>amuk3lani/baobab-bookstore-${project.artifactId}</dockerImageName>
+		<!-- Observability dependencies -->
 		<logstash-logback-encoder.version>8.0</logstash-logback-encoder.version>
 		<opentelemetry-logback.vesion>2.9.0-alpha</opentelemetry-logback.vesion>
 	</properties>
+
+	<!-- Observability dependencies -->
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -48,6 +51,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -90,20 +94,6 @@
 			<version>${springdoc-openapi.version}</version>
 		</dependency>
 
-		<!--<dependency>
-			<groupId>io.micrometer</groupId>
-			<artifactId>micrometer-registry-prometheus</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.micrometer</groupId>
-			<artifactId>micrometer-tracing-bridge-otel</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.opentelemetry</groupId>
-			<artifactId>opentelemetry-exporter-zipkin</artifactId>
-		</dependency> -->
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -135,7 +125,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/net.logstash.logback/logstash-logback-encoder -->
+		<!-- Observability dependencies https://mvnrepository.com/artifact/net.logstash.logback/logstash-logback-encoder -->
 		<dependency>
 			<groupId>net.logstash.logback</groupId>
 			<artifactId>logstash-logback-encoder</artifactId>
