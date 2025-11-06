@@ -125,12 +125,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Observability dependencies https://mvnrepository.com/artifact/net.logstash.logback/logstash-logback-encoder
-		<dependency>
-			<groupId>io.micrometer</groupId>
-			<artifactId>micrometer-registry-prometheus</artifactId>
-			<scope>runtime</scope>
-		</dependency> -->
+		<!-- Observability dependencies https://mvnrepository.com/artifact/net.logstash.logback/logstash-logback-encoder -->
 		<dependency>
 			<groupId>net.logstash.logback</groupId>
 			<artifactId>logstash-logback-encoder</artifactId>
